@@ -1,22 +1,12 @@
-# CaliburnApp1
-
-A MVVM sample app for UWP with Caliburn.Micro
-
-This project for a question for the issue.
-
-https://github.com/Caliburn-Micro/Caliburn.Micro/issues/520
-
-
-## The problem of Caliburn.Micro this sample reveals
-
-![Execution result of this application](DemoRunning.png)
-
-- Properties of ViewModel can not be referenced through a DataContext object
-- So there is no way to refer to the ViewModel of the page from the descendant of the tag with the ItemsSource attribute
-- In particular it is a serious problem that RelativeSource can not be used from the Page's own context
-
-
-PageView.xaml:
+﻿<Page
+    x:Class="CaliburnApp1.Views.PageView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CaliburnApp1.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:cm="using:Caliburn.Micro"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
 
     <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="10">
         <TextBlock Text="Main:" />
@@ -33,6 +23,11 @@ PageView.xaml:
                     </Border>
                 </ControlTemplate>
             </ItemsControl.Template>
+            <!--<ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Vertical" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>-->
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
@@ -45,38 +40,4 @@ PageView.xaml:
             </ItemsControl.ItemTemplate>
         </ItemsControl>
     </StackPanel>
-
-PageViewModel.cs:
-
-    public class BodyViewModel
-    {
-        public bool BodyEnable { get; set; } = true;
-    }
-    public class PageViewModel : Screen
-    {
-        public bool DayEnable { get; set; } = true;
-        public ObservableCollection<BodyViewModel> BodiesModel { get; set; }
-
-        private readonly INavigationService navigationService;
-        public PageViewModel(INavigationService navigationService)
-        {
-            this.navigationService = navigationService;
-
-            BodiesModel = new ObservableCollection<BodyViewModel>() {
-                new BodyViewModel()
-            };
-
-            NotifyOfPropertyChange(() => DayEnable);
-            NotifyOfPropertyChange(() => BodiesModel);
-
-        }
-    }
-
-
-## Author
-
-KATO Kanryu<k.kanryu@gmail.com>
-
-## License
-
-MIT
+</Page>
