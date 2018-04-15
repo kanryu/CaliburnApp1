@@ -11,7 +11,7 @@ https://github.com/Caliburn-Micro/Caliburn.Micro/issues/520
 
 ![Execution result of this application](DemoRunning.png)
 
-- Properties of ViewModel can not be referenced through a DataContext object
+- Properties of ViewModel(especialy, DayEnable) can not be referenced through a DataContext object
 - So there is no way to refer to the ViewModel of the page from the descendant of the tag with the ItemsSource attribute
 - In particular it is a serious problem that RelativeSource can not be used from the Page's own context
 
